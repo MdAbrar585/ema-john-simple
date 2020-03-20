@@ -12,6 +12,7 @@ import Riview from './components/Riview/Riview';
 import Inventory from './components/Inventory/Inventory';
 import NotFound from './components/NotFound/NotFound';
 import ProductDetails from './components/ProductDetails/ProductDetails';
+import LogIn from './components/LogIn/LogIn';
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path="/product/:productKey">
           <ProductDetails></ProductDetails>
+          </Route>
+          <Route path="/login">
+            <LogIn></LogIn>
           </Route>
           <Route path="*">
             <NotFound></NotFound>
