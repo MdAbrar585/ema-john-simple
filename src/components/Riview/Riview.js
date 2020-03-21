@@ -5,6 +5,7 @@ import ReviewItem from '../ReviewItem/ReviewItem';
 import './Riview.css'
 import Cart from '../Cart/Cart';
 import orderDoneImage from '../../images/giphy.gif'
+import { Link } from 'react-router-dom';
 
 const Review = () => {
     const [cart, setCart] = useState([]);
@@ -56,7 +57,9 @@ const Review = () => {
             </div>
             <div className="reviewCart-container">
                 <Cart cart={cart}>
-                    <button onClick={handlePlaceOrder} className="main-button">Place Order</button>
+                    <Link to="/shipping">
+                    <button className="main-button">Proceed CheckOut</button>
+                    </Link>
                 </Cart>
             </div>
         </div>
