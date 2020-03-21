@@ -6,10 +6,12 @@ import './Riview.css'
 import Cart from '../Cart/Cart';
 import orderDoneImage from '../../images/giphy.gif'
 import { Link } from 'react-router-dom';
+import { useAuth } from '../LogIn/useAuth';
 
 const Review = () => {
     const [cart, setCart] = useState([]);
     const [orderPlaced, setOrderPlaced] = useState(false);
+    const auth = useAuth();
 
     const handlePlaceOrder = () => {
         setCart([]);
@@ -54,11 +56,16 @@ const Review = () => {
             {
                 thankyou
             }
+            {
+                !cart.length && <h1>Cart Is Empty!!!!!!! <a href="/shop"> Keep Shoping....</a></h1>
+            }
             </div>
             <div className="reviewCart-container">
                 <Cart cart={cart}>
                     <Link to="/shipping">
-                    <button className="main-button">Proceed CheckOut</button>
+                    {
+                        auth.user ? <button className="main-button">Proceed Shipment</button> :
+                        <button className="main-button">Login to Proceed</button>}
                     </Link>
                 </Cart>
             </div>

@@ -13,7 +13,7 @@ import Inventory from './components/Inventory/Inventory';
 import NotFound from './components/NotFound/NotFound';
 import ProductDetails from './components/ProductDetails/ProductDetails';
 import LogIn from './components/LogIn/LogIn';
-import { AuthContextProvider } from './components/LogIn/useAuth';
+import { AuthContextProvider, PrivateRoute } from './components/LogIn/useAuth';
 import Shipping from './components/Shipping/Shipping';
 
 // export const UserContext = createContext();
@@ -44,9 +44,9 @@ function App() {
           <Route path="/login">
             <LogIn></LogIn>
           </Route>
-          <Route path="/shipping">
+          <PrivateRoute path="/shipping">
               <Shipping></Shipping>
-          </Route>
+          </PrivateRoute>
           <Route path="*">
             <NotFound></NotFound>
           </Route>
