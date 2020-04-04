@@ -11,6 +11,7 @@ import { Route, Redirect } from "react-router-dom";
 firebase.initializeApp(firebaseConfig);
 
 const AuthContext = createContext();
+
 export const AuthContextProvider = (props) => {
     const auth = Auth();
     return <AuthContext.Provider value={auth}>{props.children}</AuthContext.Provider>
