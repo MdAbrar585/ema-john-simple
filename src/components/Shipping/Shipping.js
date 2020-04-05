@@ -4,20 +4,28 @@ import './Shipping.css'
 import { useAuth } from '../LogIn/useAuth';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import { getDatabaseCart, processOrder } from '../../utilities/databaseManager';
+import { getDatabaseCart, clearLocalShoppingCart } from '../../utilities/databaseManager';
 import CheckoutForm from '../CheckoutForm/CheckoutForm';
+import { useState } from 'react';
 
 const Shipping = () => {
     const { register, handleSubmit, errors } = useForm();
+    const [shippingInfo, setShippingInfo] = useState(null);
+    const [orderId, setOrderId] = useState(null);
+
     const auth = useAuth();
     const stripePromise = loadStripe('pk_test_VX7COehSNQtC4I6sU5jNXeRQ00r42EFsBl');
 
     const onSubmit = data => {
+        setShippingInfo(data);
+    }
+    const handlePlaceOrder = (payment) => {
         const saveCart = getDatabaseCart();
         const orderDetails = {
             email: auth.user.email,
             cart: saveCart,
-            shipment: data
+            shipment: shippingInfo,
+            payment: payment
         };
         fetch('http://localhost:4200/placeOrder', {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -29,15 +37,17 @@ const Shipping = () => {
         })
             .then(res => res.json())
             .then(order => {
-                alert("Successfully Ordered Your Order id" + order._id);
-                processOrder();
+                //clear local storage cart
+                setOrderId(order._id);
+                clearLocalShoppingCart();
+
             })
     }
 
     return (
 
         <div className="row">
-            <div className="col-md-6">
+            <div style={{ display: shippingInfo && 'none' }} className="col-md-6">
                 <h3>Shipping Information</h3>
                 <form className="shipping-form" onSubmit={handleSubmit(onSubmit)}>
                     <input name="name" defaultValue={auth.user.name} ref={register({ required: true })} placeholder="Name" />
@@ -63,11 +73,19 @@ const Shipping = () => {
                     <input type="submit" />
                 </form>
             </div>
-            <div className="col-md-6">
+            <div style={{ display: shippingInfo ? 'block' : 'none' }} className="col-md-6">
                 <h3>Payment Information</h3>
                 <Elements stripe={stripePromise}>
-                    <CheckoutForm></CheckoutForm>
+                    <CheckoutForm handlePlaceOrder={handlePlaceOrder}></CheckoutForm>
                 </Elements>
+                <br />
+                {
+                    orderId &&
+                    <div>
+                        <h3>Thankyou For Shopping With Us</h3>
+                        <p>Your order id is: {orderId}</p>
+                    </div>
+                }
             </div>
         </div>
 
