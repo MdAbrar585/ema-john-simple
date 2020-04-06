@@ -10,7 +10,7 @@ const ProductDetails = () => {
     console.log(product);
     
     useEffect(()=>{
-        fetch('http://localhost:4200/product/'+productKey)
+        fetch('https://salty-depths-39455.herokuapp.com/product/'+productKey)
         .then(res=>res.json())
         .then(data=>{
             setProduct(data);

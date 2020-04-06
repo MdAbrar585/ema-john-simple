@@ -27,7 +27,7 @@ const Shipping = () => {
             shipment: shippingInfo,
             payment: payment
         };
-        fetch('http://localhost:4200/placeOrder', {
+        fetch('https://salty-depths-39455.herokuapp.com/placeOrder', {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
                 'Content-Type': 'application/json'

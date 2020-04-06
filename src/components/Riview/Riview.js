@@ -23,7 +23,7 @@ const Review = () => {
         const savedCart = getDatabaseCart();
         const productKeys = Object.keys(savedCart);
         console.log(productKeys);
-        fetch('http://localhost:4200/getProductsByKey', {
+        fetch('https://salty-depths-39455.herokuapp.com/getProductsByKey', {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
                 'Content-Type': 'application/json'
