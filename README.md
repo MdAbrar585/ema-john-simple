@@ -1,4 +1,13 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Ema John Simple
+### Tecnology
+1. React.js 
+2. Node.js 
+3. Stripe, HTML 
+4. Bootstrap 
+5. CSS 
+6. Firebase
+6. MongoDB.
+##### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
